@@ -1,3 +1,6 @@
+resolvers += "Sonatype OSS Snapshots" at
+  "https://oss.sonatype.org/content/repositories/releases"
+
 lazy val commonSettings = Seq(
   organization              := "org.meerkat",
   version                   := "0.1.0",
@@ -23,8 +26,11 @@ lazy val core = (project in file("core"))
       "commons-io"                     % "commons-io"    % "2.4",
       "org.bitbucket.inkytonik.dsinfo" %% "dsinfo"       % "0.4.0",
       "org.scala-graph"                %% "graph-core"   % "1.12.0",
-      "org.apache.jena"                % "jena-core"     % "3.4.0"
-    )
+      "org.apache.jena"                % "jena-core"     % "3.4.0",
+      "com.storm-enroute"              %% "scalameter"   % "0.8.2"
+    ),
+    testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework"),
+    parallelExecution in Test := false
   )
 
 lazy val neo4j = (project in file("neo4j"))
